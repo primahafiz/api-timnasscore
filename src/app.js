@@ -16,7 +16,7 @@ require('./routes')(app)
 
 process.env.TZ = "Asia/Jakarta";
 
-await RefreshDaily.refreshDaily()
+RefreshDaily.refreshDaily()
 
 const rule = new schedule.RecurrenceRule();
 rule.hour = 3;
