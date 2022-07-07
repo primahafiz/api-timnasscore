@@ -15,6 +15,15 @@ const sequelize = new Sequelize('postgres://msvpqljzizlerl:d03d1b84f1e2580a759d2
     timezone:"+07:00"
 });
 
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 fs
   .readdirSync(__dirname)
   .filter((file) =>
