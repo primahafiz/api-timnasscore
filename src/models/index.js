@@ -30,6 +30,7 @@ fs
     file !== 'index.js'
   )
   .forEach((file) => {
+    console.log(file)
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
     db[model.name] = model
   })
@@ -39,6 +40,8 @@ Object.keys(db).forEach(function (modelName) {
     db[modelName].associate(db)
   }
 })
+
+console.log("yuhuu")
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
