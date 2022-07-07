@@ -16,6 +16,11 @@ require('./routes')(app)
 
 process.env.TZ = "Asia/Jakarta";
 
+sequelize.sync({force:false})
+    .then(() => {
+        app.listen(config.port)
+    })
+
 RefreshDaily.refreshDaily()
 
 const rule = new schedule.RecurrenceRule();
@@ -25,8 +30,3 @@ rule.tz = 'Asia/Jakarta';
 const job = schedule.scheduleJob(rule, function(){
     RefreshDaily.refreshDaily()
 });
-
-sequelize.sync({force:false})
-    .then(() => {
-        app.listen(config.port)
-    })
