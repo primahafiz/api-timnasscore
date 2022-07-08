@@ -17,7 +17,7 @@ require('./routes')(app)
 process.env.TZ = "Asia/Jakarta";
 
 const rule = new schedule.RecurrenceRule();
-rule.hour = 0;
+rule.hour = 11;
 rule.tz = 'Asia/Jakarta';
 
 const job = schedule.scheduleJob(rule, function(){
