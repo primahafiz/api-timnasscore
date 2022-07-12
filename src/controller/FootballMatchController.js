@@ -11,8 +11,6 @@ module.exports = {
         const matchList = await FootballMatch.findAll({
             offset : num
         })
-        res.send({
-            response : matchList
-        })
+        res.send(matchList)
     }
 }

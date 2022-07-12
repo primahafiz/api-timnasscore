@@ -8,8 +8,6 @@ module.exports = {
                 IDMatch : req.query.IDMatch
             }
         })
-        res.send({
-            response : goalList
-        })
+        res.send(goalList)
     }
 }
