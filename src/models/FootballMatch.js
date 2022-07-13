@@ -4,7 +4,12 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.INTEGER,
             primaryKey : true
         },
-        DateTimeMatch : DataTypes.DATE,
+        DateTimeMatch :{
+            type :  DataTypes.DATE,
+            get() {
+                return moment(this.getDataValue('DateTimeMatch')).tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm')
+            }
+        },
         NameHome : DataTypes.STRING,
         NameAway : DataTypes.STRING,
         ScoreHome : DataTypes.INTEGER,

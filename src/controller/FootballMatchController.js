@@ -12,12 +12,7 @@ module.exports = {
         const matchList = await FootballMatch.findAll({
             offset : num
         })
-        console.log("length = "+matchList.length)
-        for(let i=0;i<countData-num;i++){
-            const temp = moment(new Date(matchList[i].DateTimeMatch)).tz("Asia/Jakarta").format('YYYY-MM-DD HH:mm')
-            console.log(temp)
-            matchList[i].DateTimeFormattedMatch = temp
-        }
+        
         res.send(matchList)
     }
 }
