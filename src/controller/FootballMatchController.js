@@ -13,7 +13,7 @@ module.exports = {
             offset : num
         })
         for(let i=0;i<matchList.length;i++){
-            const temp = matchList[i].DateTimeMatch
+            const temp = moment(new Date(matchList[i].DateTimeMatch)).tz("Asia/Jakarta").format('YYYY-MM-DD HH:mm')
             matchList[i].DateTimeMatch = temp
         }
         res.send(matchList)
