@@ -14,6 +14,7 @@ module.exports = {
         })
         for(let i=0;i<matchList.length;i++){
             const temp = moment(new Date(matchList[i].DateTimeMatch)).tz("Asia/Jakarta").format('YYYY-MM-DD HH:mm')
+            console.log(temp)
             matchList[i].DateTimeMatch = temp
         }
         res.send(matchList)
