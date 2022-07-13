@@ -12,7 +12,8 @@ module.exports = {
         const matchList = await FootballMatch.findAll({
             offset : num
         })
-        for(let i=0;i<matchList.length;i++){
+        console.log("length = "+matchList.length)
+        for(let i=0;i<countData-num;i++){
             const temp = moment(new Date(matchList[i].DateTimeMatch)).tz("Asia/Jakarta").format('YYYY-MM-DD HH:mm')
             console.log(temp)
             matchList[i].DateTimeMatch = temp
