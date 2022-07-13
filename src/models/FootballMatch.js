@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 module.exports = (sequelize, DataTypes) => {
     const FootballMatch = sequelize.define('FootballMatch', {
         IDMatch : {
