@@ -65,6 +65,7 @@ module.exports = {
                         l = mid+1
                     }
                 }
+                const newGoal = await GoalUpdate.goalUpdate(responseMatch[i].IDMatch)
                 if(!found){
                     const newMatch = await FootballMatch.create(responseMatch[i])
                     const newGoal = await GoalUpdate.goalUpdate(responseMatch[i].IDMatch)
