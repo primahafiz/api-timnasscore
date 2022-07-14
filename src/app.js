@@ -20,6 +20,8 @@ const rule = new schedule.RecurrenceRule();
 rule.hour = 13;
 rule.tz = 'Asia/Jakarta';
 
+RefreshDaily.refreshDaily()
+
 const job = schedule.scheduleJob(rule, function(){
     RefreshDaily.refreshDaily()
 });
