@@ -13,4 +13,4 @@ Primanda Adyatma Hafiz
 https://api-timnasscore.herokuapp.com/
 
 ## How To Use The App
-You can download the app <a href="https://github.com/primahafiz/app-timnas-score/raw/main/TimnasScore.apk">here</a>
+You can download the app <a href="https://github.com/primahafiz/timnas-score-app/raw/main/TimnasScore.apk">here</a>
