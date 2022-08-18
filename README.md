@@ -11,3 +11,6 @@ Primanda Adyatma Hafiz
 
 ## Deployed Server
 https://api-timnasscore.herokuapp.com/
+
+## How To Use The App
+You can download the app <a href="https://github.com/primahafiz/app-timnas-score/raw/main/TimnasScore.apk">here</a>
