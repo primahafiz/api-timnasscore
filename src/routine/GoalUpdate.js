@@ -9,7 +9,7 @@ module.exports = {
                 IDMatch : IDMatch
             }
         })
-        currentListGoal = []
+        const currentListGoal = []
         for(let i=0;i<currentGoal.length;i++){
             currentListGoal.push({
                 IDMatch : currentGoal[i].IDMatch,
@@ -32,7 +32,7 @@ module.exports = {
             if (error)
                 throw new Error(error)
 
-            responseGoal = []
+            const responseGoal = []
             for(let i=0;i<body.results;i++){
                 cur = body.response[i]
                 var goal = {}
