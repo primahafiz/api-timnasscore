@@ -57,6 +57,7 @@ module.exports = {
                 }
                 if(!found){
                     const newGoal = await Goal.create(responseGoal[i])
+                    console.log(responseGoal[i].PlayerName)
                 }
             }
             console.log("goal kelar")
