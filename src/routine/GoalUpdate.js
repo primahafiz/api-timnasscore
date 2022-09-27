@@ -59,6 +59,7 @@ module.exports = {
                     const newGoal = await Goal.create(responseGoal[i])
                 }
             }
+            console.log("goal kelar")
         });
     }
 }

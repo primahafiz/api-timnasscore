@@ -38,6 +38,7 @@ module.exports = {
                 }
             })
             await GoalUpdate.goalUpdate(IDMatch)
+            console.log("live kelar")
         });
     }
 }
