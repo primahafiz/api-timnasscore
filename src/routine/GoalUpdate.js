@@ -50,7 +50,7 @@ module.exports = {
             for(let i=0;i<responseGoal.length;i++){
                 var found = false
                 for(let j=0;j<currentListGoal.length;j++){
-                    if(responseGoal[i].IDMatch == currentListGoal[i].IDMatch && responseGoal[i].Minute == currentListGoal[i].Minute && responseGoal[i].ExtraMinute == currentListGoal[i].ExtraMinute && responseGoal[i].PlayerName == currentListGoal[i].PlayerName){
+                    if(responseGoal[i].IDMatch == currentListGoal[j].IDMatch && responseGoal[i].Minute == currentListGoal[j].Minute && responseGoal[i].ExtraMinute == currentListGoal[j].ExtraMinute && responseGoal[i].PlayerName == currentListGoal[j].PlayerName){
                         found = true
                         break
                     }
