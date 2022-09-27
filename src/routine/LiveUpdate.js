@@ -31,7 +31,6 @@ module.exports = {
             match.EventName = cur.league.name
             match.CurrentMinute = cur.fixture.status.elapsed
             match.StatusMatch = cur.fixture.status.short
-            console.log("yuhuu")
             // update match and goal data
             await FootballMatch.update(match,{
                 where:{

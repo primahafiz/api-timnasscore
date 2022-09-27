@@ -4,9 +4,11 @@ const request = require('request')
 const GoalUpdate = require('./GoalUpdate')
 const LiveUpdate = require('./LiveUpdate')
 const schedule = require('node-schedule');
+const fs = require('fs');
 
 module.exports = {
     async refreshDaily(){
+        console.log("masuk")
         const currentListMatch = await FootballMatch.findAll({
             attributes : ['IDMatch']
         })
@@ -26,6 +28,7 @@ module.exports = {
             }
         };
         request(options, async function (error, response, body) {
+            console.log("masuk request")
             if (error)
                 throw new Error(error)
 
@@ -34,6 +37,7 @@ module.exports = {
             for(let i=0;i<body.results;i++){
                 var cur = body.response[i]
                 var match = {}
+                if(cur.fixture.status.short == "CANC")continue
                 match.IDMatch = cur.fixture.id
                 match.DateTimeMatch = cur.fixture.date
                 match.NameHome = cur.teams.home.name
@@ -68,14 +72,6 @@ module.exports = {
                 if(!found){
                     const newMatch = await FootballMatch.create(responseMatch[i])
                     const newGoal = await GoalUpdate.goalUpdate(responseMatch[i].IDMatch)
-                    const dateTimeNow = new Date()
-                    if(dateTimeNow <= new Date(responseMatch[i].DateTimeMatch)){
-                        const startTime = new Date(responseMatch[i].DateTimeMatch)
-                        const endTime = startTime.getTime() + 12000000
-                        const job = schedule.scheduleJob({start : startTime,end : endTime,rule : '*/5 * * * *'},function(){
-                            LiveUpdate.liveUpdate(responseMatch[i].IDMatch)   
-                        })
-                    }
                 }
             }
         });
@@ -98,6 +94,7 @@ module.exports = {
             for(let i=0;i<body.results;i++){
                 var cur = body.response[i]
                 var match = {}
+                if(cur.fixture.status.short == "TBD")continue
                 match.IDMatch = cur.fixture.id
                 match.DateTimeMatch = cur.fixture.date
                 match.NameHome = cur.teams.home.name
@@ -111,6 +108,16 @@ module.exports = {
                 responseMatch.push(match)
             }
             console.log("Next = "+responseMatch)
+
+            let curmin=(new Date()).getTime()+86400000*100
+            let nextID=0
+
+            for(let i=0;i<responseMatch.length;i++){
+                if(curmin>(new Date(responseMatch[i].DateTimeMatch)).getTime()){
+                    curmin=(new Date(responseMatch[i].DateTimeMatch)).getTime()
+                    nextID=responseMatch[i].IDMatch
+                }
+            }
 
             // insert to database
             for(let i=0;i<responseMatch.length;i++){
@@ -134,11 +141,14 @@ module.exports = {
                     const newGoal = await GoalUpdate.goalUpdate(responseMatch[i].IDMatch)
                     const dateTimeNow = new Date()
                     if(dateTimeNow <= new Date(responseMatch[i].DateTimeMatch)){
-                        const startTime = new Date(responseMatch[i].DateTimeMatch)
-                        const endTime = startTime.getTime() + 12000000
-                        const job = schedule.scheduleJob({start : startTime,end : endTime,rule : '*/5 * * * *'},function(){
-                            LiveUpdate.liveUpdate(responseMatch[i].IDMatch)   
-                        })
+                        fs.readFile('update.json', (err, data) => {
+                            if (err) throw err;
+                            let update = JSON.parse(data);
+                            update.nextIDMatch=nextID
+                            update.nextStartTime=curmin
+                            update.nextEndTime=curmin+9000000
+                            fs.writeFileSync('update.json', JSON.stringify(update));
+                        });
                     }
                 }
             }

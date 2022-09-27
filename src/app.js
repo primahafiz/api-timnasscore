@@ -5,7 +5,9 @@ const morgan = require('morgan')
 const config = require("./config/config")
 const {sequelize} = require('./models')
 const schedule = require('node-schedule');
+const fs = require('fs');
 const RefreshDaily = require('./routine/RefreshDaily')
+const LiveUpdate = require('./routine/LiveUpdate')
 
 const app = express()
 app.use(morgan('combined'))
@@ -20,9 +22,20 @@ const rule = new schedule.RecurrenceRule();
 rule.hour = 13;
 rule.tz = 'Asia/Jakarta';
 
-const job = schedule.scheduleJob(rule, function(){
+console.log(new Date())
+
+let data = fs.readFileSync('update.json')
+let update = JSON.parse(data);
+if(new Date() - new Date(update.lastUpdated)>=86400000){
+    update.lastUpdated = (new Date()).getTime()
+    fs.writeFileSync('update.json', JSON.stringify(update))
     RefreshDaily.refreshDaily()
-});
+}
+if(new Date() - new Date(update.nextStartTime) >= 300000 && new Date()<new Date(update.nextEndTime)){
+    LiveUpdate.liveUpdate(update.nextIDMatch)
+    update.nextStartTime = (new Date()).getTime()
+    fs.writeFileSync('update.json', JSON.stringify(update))
+}
 
 sequelize.sync({force:false})
     .then(() => {
