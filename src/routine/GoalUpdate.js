@@ -4,6 +4,11 @@ const request = require('request')
 
 module.exports = {
     async goalUpdate(IDMatch){
+        await Goal.destroy({
+            where :{
+                PlayerName : null
+            }
+        })
         const currentGoal = await Goal.findAll({
             where : {
                 IDMatch : IDMatch
@@ -45,6 +50,7 @@ module.exports = {
                 responseGoal.push(goal)
             }
             console.log(responseGoal)
+            console.log(currentListGoal)
 
             // insert to database
             for(let i=0;i<responseGoal.length;i++){
@@ -56,11 +62,10 @@ module.exports = {
                     }
                 }
                 if(!found){
-                    const newGoal = await Goal.create(responseGoal[i])
                     console.log(responseGoal[i].PlayerName)
+                    const newGoal = await Goal.create(responseGoal[i])
                 }
             }
-            console.log("goal kelar")
         });
     }
 }

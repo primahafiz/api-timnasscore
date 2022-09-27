@@ -8,7 +8,7 @@ module.exports = {
     async getAllData(req,res){
         let data = fs.readFileSync('update.json')
         let update = JSON.parse(data);
-        if(new Date() - new Date(update.nextStartTime) >= 200000 && new Date()<new Date(update.nextEndTime)){
+        if(new Date() - new Date(update.nextStartTime) >= 300000 && new Date()<new Date(update.nextEndTime)){
             await LiveUpdate.liveUpdate(update.nextIDMatch)
             update.nextStartTime = (new Date()).getTime()
             fs.writeFileSync('update.json', JSON.stringify(update))

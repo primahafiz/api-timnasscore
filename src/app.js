@@ -26,6 +26,7 @@ console.log(new Date())
 
 let data = fs.readFileSync('update.json')
 let update = JSON.parse(data);
+LiveUpdate.liveUpdate(update.nextIDMatch)
 if(new Date() - new Date(update.lastUpdated)>=86400000){
     update.lastUpdated = (new Date()).getTime()
     fs.writeFileSync('update.json', JSON.stringify(update))
