@@ -13,12 +13,12 @@ module.exports = {
             offset : num
         })
 
-        const res = []
+        const result = []
         for(let i=0;i<matchList.length;i++){
             if(matchList[i].StatusMatch === "TBD" || matchList[i].StatusMatch === "CANC")continue
-            res.push(matchList[i])
+            result.push(matchList[i])
         }
         
-        res.send(res)
+        res.send(result)
     }
 }
