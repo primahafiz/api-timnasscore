@@ -1,6 +1,7 @@
 const {FootballMatch} = require('../models')
 const {sequelize} = require('../models')
 const { Op } = require('sequelize')
+const fs = require('fs');
 
 module.exports = {
     async getAllData(req,res){
