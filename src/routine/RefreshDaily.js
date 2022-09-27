@@ -37,7 +37,7 @@ module.exports = {
             for(let i=0;i<body.results;i++){
                 var cur = body.response[i]
                 var match = {}
-                if(cur.fixture.status.short == "CANC")continue
+                if(cur.fixture.status.short === "CANC")continue
                 match.IDMatch = cur.fixture.id
                 match.DateTimeMatch = cur.fixture.date
                 match.NameHome = cur.teams.home.name
@@ -94,7 +94,7 @@ module.exports = {
             for(let i=0;i<body.results;i++){
                 var cur = body.response[i]
                 var match = {}
-                if(cur.fixture.status.short == "TBD")continue
+                if(cur.fixture.status.short === "TBD")continue
                 match.IDMatch = cur.fixture.id
                 match.DateTimeMatch = cur.fixture.date
                 match.NameHome = cur.teams.home.name
