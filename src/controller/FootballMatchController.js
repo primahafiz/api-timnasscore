@@ -10,12 +10,15 @@ module.exports = {
             num=0
         }
         const matchList = await FootballMatch.findAll({
-            offset : num,
-            where:{
-                [Op.or]: [{StatusMatch: "CANC"}, {StatusMatch: "TBD"}]
-            }
+            offset : num
         })
+
+        const res = []
+        for(let i=0;i<matchList.length;i++){
+            if(matchList[i].StatusMatch === "TBD" || matchList[i].StatusMatch === "CANC")continue
+            res.push(matchList[i])
+        }
         
-        res.send(matchList)
+        res.send(res)
     }
 }
