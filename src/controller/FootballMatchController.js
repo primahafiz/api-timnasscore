@@ -1,4 +1,5 @@
 const {FootballMatch} = require('../models')
+const LiveUpdate = require('../routine/LiveUpdate')
 const {sequelize} = require('../models')
 const { Op } = require('sequelize')
 const fs = require('fs');
